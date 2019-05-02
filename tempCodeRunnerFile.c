@@ -1,0 +1,1 @@
+cd "d:\Desktop\Code\projekt\" ; cd "d:\Desktop\Code\projekt\" ; if ($?) { gcc main.c mergesort.c readfile.c functions.c input.c -o main } ; if ($?) { .\main }

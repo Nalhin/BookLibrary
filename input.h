@@ -3,7 +3,6 @@
 
 #include "structures.h"
 
-void input(char *input, list* head);
-
+void input(char *input, list *head);
 
 #endif // INPUT_H_INCLUDED
