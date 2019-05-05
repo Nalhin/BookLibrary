@@ -4,10 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #include "mergesort.h"
 #include "structures.h"
-
 
 #define size 30
 
@@ -105,10 +103,8 @@ int check_unique_id_silent(int id, list *head) // sprawdza unikatowosc id
 
     if (head->b->book_id == id) // szukana wartosc
     {
-
       return 1;
     }
-
     head = head->next;
   }
 
@@ -168,7 +164,7 @@ void edit_book(list *head, int id) // funkcja edytujaca element listy
     while (books != NULL) {
       if (books->b->book_id == id) // szukana wartosc
       {
-
+        // free(books->b->title);
         books->b->title = strdup(strtok(value, "\n"));
       }
       books = books->next;
@@ -327,7 +323,6 @@ remove_extra_white_chars(char *temp) // usuwanie dodatkowych bialych znakow
     if (isspace(temp[i]) == 0) {
       temp1[j] = temp[i];
       white = false;
-
       j++;
     } else if (white == false) {
       temp1[j] = temp[i];
@@ -348,7 +343,6 @@ char *remove_all_white_chars(char *temp) // usuwanie dodatkowych bialych znakow
   for (int i = 0; i < size; i++) {
     if (isspace(temp[i]) == 0) {
       temp1[j] = temp[i];
-
       j++;
     }
   }
@@ -357,27 +351,45 @@ char *remove_all_white_chars(char *temp) // usuwanie dodatkowych bialych znakow
   return temp;
 }
 
-list *delete_list(list *currP, int book_id) // usuwa element z listy
+list *delete_list(list *head, int book_id) // usuwa element z listy
 {
-  if (currP == NULL)
+  if (head == NULL)
     return NULL;
 
-  if (currP->b->book_id == book_id) {
+  if (head->b->book_id == book_id) {
     list *tempNextP;
-
-    tempNextP = currP->next;
-
+    tempNextP = head->next;
     /* Dealokacja noda */
-    free(currP);
+    free(head);
     printf("Usunieto %i element\n", book_id);
-
     return tempNextP;
   }
-
-  currP->next = delete_list(currP->next, book_id);
-
-  return currP;
+  head->next = delete_list(head->next, book_id);
+  return head;
 }
+
+list* delete_whole_list(list* head)  
+{  
+      
+/* deref head_ref to get the real head */
+list* current = head;  
+list* next;  
+  
+while (current != NULL)  
+{  
+    next = current->next;
+    free(current->b->author);
+    free(current->b->subject);
+    free(current->b->title);  
+    free(current->b);   
+    free(current);  
+    current = next;  
+}  
+      
+/* deref head_ref to affect the real head back  
+    in the caller. */
+return NULL;
+} 
 
 list *
 add_book(list *head) // dodaje ksiazke do listy + sprawdzanie poprawnosci danych

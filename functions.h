@@ -19,7 +19,8 @@ void count_subject_occurence(list *head);
 int count_books(list *head);
 char *remove_extra_white_chars(char *temp);
 char *remove_all_white_chars(char *temp);
-list *delete_list(list *currP, int book_id);
+list *delete_list(list *head, int book_id);
+list* delete_whole_list(list *head);
 list *add_book(list *head);
 void find_print_books(list *head, int idpi, int idki, int yearpi, int yearki,
                       char *autor, char *tytul);

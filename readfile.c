@@ -3,36 +3,30 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #include "functions.h"
 #include "readfile.h"
 #include "structures.h"
 
-
 #define size 30
 
 list *read_parse_file(list *head) { // funkcja odpowiadajaca za wczytanie pliku
-                                    // i zapisanie go w liscie
+  // i zapisanie go w liscie
   FILE *f;
   char *filename = "xd.txt";
 
+  f = fopen(filename, "r");
+  if (f == NULL) {
+    printf("Nie mozna otworzyc pliku %s\n", filename);
+    return NULL;
+  }
+
   char temp[size];
   int numer = 0; // numer elementu
-
-  // list *books = NULL;           //zdefiniowanie pustej listy
-  //  books = malloc(sizeof(book)); //przydzial pamieci na liste
-
   char title[size] = "";
   char author[size] = "";
   int year;
   char subject[size] = "";
   int id;
-
-  f = fopen(filename, "r");
-  if (f == NULL) {
-    printf("Nie mozna otworzyc pliku %s\n", filename);
-    exit(1);
-  }
 
   while (fgets(temp, size, f) != NULL) {
 
@@ -139,17 +133,12 @@ list *read_parse_file(list *head) { // funkcja odpowiadajaca za wczytanie pliku
       id = atoi(temp);
       list *temps = (list *)malloc(sizeof(struct list));
       temps->b = create_book(strtok(title, "\n"), strtok(author, "\n"), year,
-                             strtok(subject, "\n"),
-                             id); // strtok(subject,"\n") remove new line
+                             strtok(subject, "\n"), id);
       temps->next = head;
       head = temps;
-      // books->b =create_book(title, author, year, subject, id);
-      //  books->next;
       break;
     }
     }
-
-    //   printf("%s", temp);
   }
 
   fclose(f);

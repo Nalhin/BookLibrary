@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #include "functions.h"
 #include "input.h"
 #include "mergesort.h"
@@ -12,7 +11,8 @@
 #define size 30
 
 // cd "d:\Desktop\Code\projekt\" ; cd "d:\Desktop\Code\projekt\" ; if ($?) { gcc
-// main.c mergesort.c readfile.c functions.c input.c -o main } ; if ($?) { .\main
+// main.c mergesort.c readfile.c functions.c input.c -o main } ; if ($?) {
+// .\main}
 // }
 
 int main() {
@@ -26,11 +26,12 @@ int main() {
       "rekord istnieje, Stat-wyswietlenie danych statystycznych, "
       "Sort-sortowanie, Save-zapisz do pliku, Del-usun konkretny, Find-znajdz "
       "konkretne, PrintAll-wypisz wszystkie, Help-lista polecen\n");
-
-  while (1) {
-    fgets(inputs, sizeof inputs, stdin);
-    input(inputs, head);
-  }
-
+  
+    while (head!=NULL) {
+      fgets(inputs, sizeof inputs, stdin);
+      head=input(inputs, head);
+      
+    }
+  printf("Dobranoc\n");
   return 0;
 }

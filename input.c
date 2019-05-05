@@ -14,7 +14,7 @@
 // cd "d:\Desktop\Code\projekt\" ; cd "d:\Desktop\Code\projekt\" ; if ($?) { gcc
 // main.c mergesort.c readfile.c functions.c -o main } ; if ($?) { .\main }
 
-void input(char *input, list *head) {
+list* input(char *input, list *head) {
 
   if (strcmp(input, "Add\n") == 0) {
     head = add_book(head);
@@ -173,9 +173,11 @@ void input(char *input, list *head) {
            "polecen\n");
   } else if (strcmp(input, "Eqit\n") == 0) {
     printf("Eqiting\n");
-    exit(0);
+    head= delete_whole_list(head);
   }
 
   else
     printf("Twoje polecenie jest inwalida\n");
+
+  return head;
 }
